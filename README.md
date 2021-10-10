@@ -39,6 +39,7 @@ Before encryption, the packet stores the following information
 2. `data`: Message Data
 3. `round`: An integer value which is incremented once every time the counter value needs to be reset
 4. `counter`: An integer value used to keep track of the `nth` message sent/received on a connection
+5. `signature`: Message digest of the `type` + `data` + `round` + `counter` values
 
 The digest is calculated by concatenating the original message fields (above) and sending it through the HMAC-SHA256 algorithm.
 The payload along with the digest is encrypted using the custom encryption algorithm and sent on the connection.
