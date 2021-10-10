@@ -2,6 +2,21 @@
 
 This is a simple file storage project following the client-server model of communication written over plain TCP sockets with security enhancements satisfying the project requirements
 
+### Tech
+
+- Node.js - Socket programming
+- RSA, SHA-256 and HMAC-SHA256
+- Custom Encryption Algorithm using SHA-256 Algorithm
+
+### How to run?
+
+```sh
+chmod +x ./cli.js
+./cli.js server # Server
+./cli.js upload ./file # Client Upload
+./cli.js download ./file # Client Download
+```
+
 ### Requirements and Fulfillments
 
 1. File upload/download functionality
@@ -13,12 +28,6 @@ This is a simple file storage project following the client-server model of commu
 4. Integrity: Every packet should be verified for integrity
    - Implemented using the `HMAC-SHA256` algorithm
    - Protocol utilizes `round` and `counter` variables (separate for ingress and egress traffic) which are checked for each packet
-
-### Tech
-
-- Node.js - Socket programming
-- RSA, SHA-256 and HMAC-SHA256
-- Custom Encryption Algorithm using SHA-256 Algorithm
 
 ### Protocol
 
@@ -58,4 +67,14 @@ The payload along with the digest is encrypted using the custom encryption algor
 
 ### Attack Scenarios and Mitigations
 
-TODO
+1. Passive Attacks
+    1. Eavesdropping
+        The communication protocol used is resistant against this kind of attack by using 4 keys, 2 for maintaining confidentiality and the other 2 for maintaining and the checking the integrity of the messages exchanged over the connection. These keys are used with SHA-256 algorithm for both encryption and message digest functions.
+2. Active Attacks
+    1. Replay Attacks
+        The protocol used is resistant against these attacks by implementing a counter (unique to ingress and egress packets/messages) which is incremented after sending/receiving a message. The recipient compares the expected value with the received value to determine if it's replayed. Also, all the parties involved in the communication maintain a state which determines what type of messages it should expect. Any anomaly is treated as an attack and the connection is dropped.
+    2. Message Manipulation Attacks
+        The protocol is resistant against these types of attacks by implementing a message packing scheme where in, the sender generates the message digest by using the data (to be sent) + message type + round + counter values. The generated digest is appended to the message and the result is encrypted. The receiver will first decrypt the message and then check the round and counter values which are expected and then verify the integrity of the message received in a similar way.
+    3. Node Compromise Attacks
+        The protocol is also resistant to this kind of attack as the keys generated are ephemeral and are valid for only the timeline of the connection and not stored anywhere on the disk for an attacker to compromise the communication channel.
+        If the server is compromised, the only way to recover is to revoke the certificate issued by the CA.
