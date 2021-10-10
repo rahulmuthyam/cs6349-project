@@ -69,12 +69,12 @@ The payload along with the digest is encrypted using the custom encryption algor
 
 1. Passive Attacks
     1. Eavesdropping
-        The communication protocol used is resistant against this kind of attack by using 4 keys, 2 for maintaining confidentiality and the other 2 for maintaining and the checking the integrity of the messages exchanged over the connection. These keys are used with SHA-256 algorithm for both encryption and message digest functions.
+        * The communication protocol used is resistant against this kind of attack by using 4 keys, 2 for maintaining confidentiality and the other 2 for maintaining and the checking the integrity of the messages exchanged over the connection. These keys are used with SHA-256 algorithm for both encryption and message digest functions.
 2. Active Attacks
     1. Replay Attacks
-        The protocol used is resistant against these attacks by implementing a counter (unique to ingress and egress packets/messages) which is incremented after sending/receiving a message. The recipient compares the expected value with the received value to determine if it's replayed. Also, all the parties involved in the communication maintain a state which determines what type of messages it should expect. Any anomaly is treated as an attack and the connection is dropped.
+        * The protocol used is resistant against these attacks by implementing a counter (unique to ingress and egress packets/messages) which is incremented after sending/receiving a message. The recipient compares the expected value with the received value to determine if it's replayed. Also, all the parties involved in the communication maintain a state which determines what type of messages it should expect. Any anomaly is treated as an attack and the connection is dropped.
     2. Message Manipulation Attacks
-        The protocol is resistant against these types of attacks by implementing a message packing scheme where in, the sender generates the message digest by using the data (to be sent) + message type + round + counter values. The generated digest is appended to the message and the result is encrypted. The receiver will first decrypt the message and then check the round and counter values which are expected and then verify the integrity of the message received in a similar way.
+        * The protocol is resistant against these types of attacks by implementing a message packing scheme where in, the sender generates the message digest by using the data (to be sent) + message type + round + counter values. The generated digest is appended to the message and the result is encrypted. The receiver will first decrypt the message and then check the round and counter values which are expected and then verify the integrity of the message received in a similar way.
     3. Node Compromise Attacks
-        The protocol is also resistant to this kind of attack as the keys generated are ephemeral and are valid for only the timeline of the connection and not stored anywhere on the disk for an attacker to compromise the communication channel.
-        If the server is compromised, the only way to recover is to revoke the certificate issued by the CA.
+        * The protocol is also resistant to this kind of attack as the keys generated are ephemeral and are valid for only the timeline of the connection and not stored anywhere on the disk for an attacker to compromise the communication channel.
+        * If the server is compromised, the only way to recover is to revoke the certificate issued by the CA.
