@@ -6,8 +6,6 @@
   "private": true,
   "dependencies": {
     "commander": "^8.2.0",
-    "log-symbols": "^5.0.0",
-    "nano-time": "^1.0.0",
     "node-forge": "^0.10.0",
     "split": "^1.0.1"
   }
