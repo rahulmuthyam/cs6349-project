@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "commander": "^8.2.0",
+    "log-horizon": "^0.1.2",
     "node-forge": "^0.10.0",
     "split": "^1.0.1"
   }

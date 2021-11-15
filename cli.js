@@ -5,6 +5,10 @@ const server = require("./lib/server");
 const client = require("./lib/client");
 const { promises: fs } = require("fs");
 const path = require("path");
+const LogHorizon = require('log-horizon');
+const logger = new LogHorizon({
+    statusType: "badge"
+});
 
 program.version('0.0.1');
 
@@ -36,7 +40,7 @@ program
                 size: stat.size,
             });
         } catch (err) {
-            console.error(err);
+            logger.error(err);
         }
     });
 
@@ -55,7 +59,7 @@ program
                 size: 0
             });
         } catch (err) {
-            console.error(err);
+            logger.error(err);
         }
     });
 
