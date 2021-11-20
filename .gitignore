@@ -126,4 +126,7 @@ dist
 # Serverless Webpack directories
 .webpack/
 
+### test temp dir ###
+test/temp/
+
 # End of https://www.toptal.com/developers/gitignore/api/node
