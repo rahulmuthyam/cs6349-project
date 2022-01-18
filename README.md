@@ -1,6 +1,6 @@
 # CS6349 - Project
 
-This is a simple file storage project following the client-server model of communication written over plain TCP sockets with security enhancements satisfying the project requirements
+This is a simple file transfer project following the client-server model of communication written over plain TCP sockets with security enhancements satisfying the project requirements
 
 ### Tech
 
